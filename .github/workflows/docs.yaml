@@ -27,7 +27,7 @@ jobs:
       # Upload docs as artifact to use later
       - name: Upload docs artifact
         id: upload-docs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: rust-docs
           path: target/doc
