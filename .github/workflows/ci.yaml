@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '20'
-      - uses: bazelbuild/setup-bazel@v3
+      - uses: abhinavsingh/setup-bazel@v3
         with:
           version: '6.5.0'
       - name: Cache Bazel
@@ -44,7 +44,7 @@ jobs:
           toolchain: stable
           profile: minimal
           override: true
-      - uses: bazelbuild/setup-bazel@v3
+      - uses: abhinavsingh/setup-bazel@v3
         with:
           version: '6.5.0'
       - name: Cache Bazel
@@ -71,7 +71,7 @@ jobs:
           toolchain: stable
           profile: minimal
           override: true
-      - uses: bazelbuild/setup-bazel@v3
+      - uses: abhinavsingh/setup-bazel@v3
         with:
           version: '6.5.0'
       - name: Cache Bazel
@@ -98,7 +98,7 @@ jobs:
           toolchain: stable
           profile: minimal
           override: true
-      - uses: bazelbuild/setup-bazel@v3
+      - uses: abhinavsingh/setup-bazel@v3
         with:
           version: '6.5.0'
       - name: Cache Bazel
