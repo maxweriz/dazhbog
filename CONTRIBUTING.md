@@ -1,4 +1,4 @@
-# Contributing to Dazhbog 
+# Contributing to Dazhbog
 
 Thank you for considering contributing! 🎉  
 We welcome contributions of all kinds: bug reports, new features, documentation, examples, and code improvements.
@@ -6,6 +6,7 @@ We welcome contributions of all kinds: bug reports, new features, documentation,
 ---
 
 ## Table of Contents
+
 1. [How to Contribute](#how-to-contribute)
 2. [Reporting Bugs](#reporting-bugs)
 3. [Suggesting Features](#suggesting-features)
@@ -21,6 +22,7 @@ We welcome contributions of all kinds: bug reports, new features, documentation,
 ## How to Contribute
 
 You can contribute in several ways:
+
 - Reporting bugs
 - Suggesting features
 - Submitting pull requests
@@ -74,44 +76,43 @@ Fork the repo or create a branch and follow these steps:
 
 ## Code Style
 
-* Follow standard Rust formatting: cargo fmt
+- Follow standard Rust formatting: cargo fmt
 
-* Avoid compiler warnings: cargo clippy --all-targets --all-features
+- Avoid compiler warnings: cargo clippy --all-targets --all-features
 
-* Write clear, idiomatic Rust code
+- Write clear, idiomatic Rust code
 
-* Add comments for complex logic
+- Add comments for complex logic
 
 ---
 
 ## Testing
 
-* Run cargo test before submitting a PR
+- Run cargo test before submitting a PR
 
-* Include tests for any new functionality
+- Include tests for any new functionality
 
-* Ensure existing tests pass
-
+- Ensure existing tests pass
 
 ---
 
 ## Documentation
 
-* Document public functions, structs, and enums using Rustdoc comments (///)
+- Document public functions, structs, and enums using Rustdoc comments (///)
 
-* Update README.md and docs/ if necessary
+- Update README.md and docs/ if necessary
 
-* Examples should compile and demonstrate typical use cases
+- Examples should compile and demonstrate typical use cases
 
 ---
 
 ## Communication & Etiquette
 
-* Be respectful in discussions and code reviews
+- Be respectful in discussions and code reviews
 
-* Use GitHub issues and pull requests for asynchronous communication
+- Use GitHub issues and pull requests for asynchronous communication
 
-* Be patient; maintainers may take time to review contributions
+- Be patient; maintainers may take time to review contributions
 
 ---
 
@@ -120,4 +121,5 @@ Fork the repo or create a branch and follow these steps:
 By contributing, you agree that your contributions will be licensed under the project’s license (see LICENSE in the root directory).
 
 ---
+
 Thank you for helping make this project better! 💜

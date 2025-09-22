@@ -1,59 +1,61 @@
-load("@bazel_tools//tools/build_defs/genrule:genrule.bzl", "genrule")
+# --- Filegroups for sources ---
+filegroup(
+    name = "rust_sources",
+    srcs = glob(
+        ["src/**/*.rs",
+         "Cargo.toml",
+         "Cargo.lock"],
+        allow_empty = True,
+    ),
+)
 
-# Prettier formatting check
-genrule(
+# --- Prettier ---
+sh_binary(
     name = "prettier_check",
-    srcs = glob(["**/*.{md,js,json,yml,yaml,css,ts,tsx}"]),
-    outs = ["prettier_stamp.txt"],
-    cmd = """
-    npx prettier --check "**/*.{md,js,json,yml,yaml,css,ts,tsx}"
-    touch $@
-    """,
+    srcs = ["tools/prettier.sh"],
+    args = ["--check"],
 )
 
-# Rust formatting
-genrule(
-    name = "rust_fmt",
-    srcs = glob(["src/**/*.rs", "Cargo.toml", "Cargo.lock"]),
-    outs = ["rust_fmt_stamp.txt"],
-    cmd = """
-    cargo fmt --all -- --check
-    touch $@
-    """,
+sh_binary(
+    name = "prettier_fix",
+    srcs = ["tools/prettier.sh"],
+    args = ["--write"],
 )
 
-# Rust linter (Clippy)
-genrule(
-    name = "clippy",
-    srcs = glob(["src/**/*.rs", "Cargo.toml", "Cargo.lock"]),
-    outs = ["clippy_stamp.txt"],
-    cmd = """
-    cargo clippy --all-targets --all-features -- -D warnings
-    touch $@
-    """,
+# --- Rust fmt ---
+sh_binary(
+    name = "rust_fmt_check",
+    srcs = ["tools/rustfmt.sh"],
+    data = [":rust_sources"],
+    args = ["--all", "--", "--check"],
 )
 
-# Rust tests
-genrule(
+sh_binary(
+    name = "rust_fmt_fix",
+    srcs = ["tools/rustfmt.sh"],
+    data = [":rust_sources"],
+    args = ["--all"],
+)
+
+# --- Clippy ---
+sh_binary(
+    name = "clippy_check",
+    srcs = ["tools/clippy.sh"],
+    data = [":rust_sources"],
+    args = ["--all-targets", "--all-features", "--", "-D", "warnings"],
+)
+
+sh_binary(
+    name = "clippy_fix",
+    srcs = ["tools/clippy.sh"],
+    data = [":rust_sources"],
+    args = ["--all-targets", "--all-features", "--fix", "--allow-dirty", "--allow-staged"],
+)
+
+# --- Rust tests ---
+sh_binary(
     name = "rust_tests",
-    srcs = glob(["src/**/*.rs", "Cargo.toml", "Cargo.lock"]),
-    outs = ["tests_stamp.txt"],
-    cmd = """
-    cargo test --all-features --verbose
-    touch $@
-    """,
-)
-
-# Aggregate target to run everything in one command
-genrule(
-    name = "ci_all",
-    srcs = [],
-    outs = ["ci_all_stamp.txt"],
-    tools = [
-        ":prettier_check",
-        ":rust_fmt",
-        ":clippy",
-        ":rust_tests",
-    ],
-    cmd = "touch $@",
+    srcs = ["tools/rust_tests.sh"],
+    data = [":rust_sources"],
+    args = ["--all-features", "--verbose"],
 )
