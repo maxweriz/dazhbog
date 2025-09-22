@@ -1,0 +1,61 @@
+# --- Filegroups for sources ---
+filegroup(
+    name = "rust_sources",
+    srcs = glob(
+        ["src/**/*.rs",
+         "Cargo.toml",
+         "Cargo.lock"],
+        allow_empty = True,
+    ),
+)
+
+# --- Prettier ---
+sh_binary(
+    name = "prettier_check",
+    srcs = ["tools/prettier.sh"],
+    args = ["--check"],
+)
+
+sh_binary(
+    name = "prettier_fix",
+    srcs = ["tools/prettier.sh"],
+    args = ["--write"],
+)
+
+# --- Rust fmt ---
+sh_binary(
+    name = "rust_fmt_check",
+    srcs = ["tools/rustfmt.sh"],
+    data = [":rust_sources"],
+    args = ["--all", "--", "--check"],
+)
+
+sh_binary(
+    name = "rust_fmt_fix",
+    srcs = ["tools/rustfmt.sh"],
+    data = [":rust_sources"],
+    args = ["--all"],
+)
+
+# --- Clippy ---
+sh_binary(
+    name = "clippy_check",
+    srcs = ["tools/clippy.sh"],
+    data = [":rust_sources"],
+    args = ["--all-targets", "--all-features", "--", "-D", "warnings"],
+)
+
+sh_binary(
+    name = "clippy_fix",
+    srcs = ["tools/clippy.sh"],
+    data = [":rust_sources"],
+    args = ["--all-targets", "--all-features", "--fix", "--allow-dirty", "--allow-staged"],
+)
+
+# --- Rust tests ---
+sh_binary(
+    name = "rust_tests",
+    srcs = ["tools/rust_tests.sh"],
+    data = [":rust_sources"],
+    args = ["--all-features", "--verbose"],
+)

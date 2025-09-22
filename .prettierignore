@@ -1,0 +1,18 @@
+# Rust build artifacts
+target/
+Cargo.lock
+
+# Node dependencies
+node_modules/
+
+# Git
+.git/
+.gitignore
+
+# Generated docs
+docs/
+*.log
+
+# Misc
+*.bak
+*.tmp

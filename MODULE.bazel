@@ -1,0 +1,7 @@
+module(
+    name = "dazhbog",
+    version = "0.1.0",
+)
+
+bazel_dep(name = "rules_rust", version = "0.65.0")
+bazel_dep(name = "rules_nodejs", version = "6.5.0")
