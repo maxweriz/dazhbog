@@ -1,0 +1,59 @@
+load("@bazel_tools//tools/build_defs/genrule:genrule.bzl", "genrule")
+
+# Prettier formatting check
+genrule(
+    name = "prettier_check",
+    srcs = glob(["**/*.{md,js,json,yml,yaml,css,ts,tsx}"]),
+    outs = ["prettier_stamp.txt"],
+    cmd = """
+    npx prettier --check "**/*.{md,js,json,yml,yaml,css,ts,tsx}"
+    touch $@
+    """,
+)
+
+# Rust formatting
+genrule(
+    name = "rust_fmt",
+    srcs = glob(["src/**/*.rs", "Cargo.toml", "Cargo.lock"]),
+    outs = ["rust_fmt_stamp.txt"],
+    cmd = """
+    cargo fmt --all -- --check
+    touch $@
+    """,
+)
+
+# Rust linter (Clippy)
+genrule(
+    name = "clippy",
+    srcs = glob(["src/**/*.rs", "Cargo.toml", "Cargo.lock"]),
+    outs = ["clippy_stamp.txt"],
+    cmd = """
+    cargo clippy --all-targets --all-features -- -D warnings
+    touch $@
+    """,
+)
+
+# Rust tests
+genrule(
+    name = "rust_tests",
+    srcs = glob(["src/**/*.rs", "Cargo.toml", "Cargo.lock"]),
+    outs = ["tests_stamp.txt"],
+    cmd = """
+    cargo test --all-features --verbose
+    touch $@
+    """,
+)
+
+# Aggregate target to run everything in one command
+genrule(
+    name = "ci_all",
+    srcs = [],
+    outs = ["ci_all_stamp.txt"],
+    tools = [
+        ":prettier_check",
+        ":rust_fmt",
+        ":clippy",
+        ":rust_tests",
+    ],
+    cmd = "touch $@",
+)
