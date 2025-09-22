@@ -31,7 +31,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-bazel-
       - name: Run Prettier
-        run: bazel build //:prettier_check
+        run: bazel run //:prettier_check
 
   # 2. Rust formatting check
   rust_fmt:
@@ -57,7 +57,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-bazel-
       - name: Run Rust fmt
-        run: bazel build //:rust_fmt
+        run: bazel run //:rust_fmt_check
 
   # 3. Clippy linter (depends on Prettier + Rust fmt)
   clippy:
@@ -84,7 +84,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-bazel-
       - name: Run Clippy
-        run: bazel build //:clippy
+        run: bazel run //:clippy_check
 
   # 4. Rust tests (depends on Prettier + Rust fmt)
   tests:
@@ -111,4 +111,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-bazel-
       - name: Run Rust tests
-        run: bazel build //:rust_tests
+        run: bazel run //:rust_tests
