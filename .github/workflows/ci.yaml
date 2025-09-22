@@ -1,22 +1,38 @@
-name: Dazhbog CI 
+name: Dazhbog CI
 
 on:
   push:
     branches:
-      - main
-      - 'feature/**'
+      - '**'
   pull_request:
     branches:
-      - main
+      - '**'
 
 jobs:
-  build:
+  ci:
+    name: Rust CI (Fail Fast)
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout code
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
+      # 2. Set up Node.js for Prettier (lightweight)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      # 3. Install Prettier
+      - name: Install Prettier
+        run: npm install --save-dev prettier
+
+      # 4. Prettier formatting check (fail fast)
+      - name: Check Prettier formatting
+        run: npx prettier --check "**/*.{md,js,json,yml,yaml,css,ts,tsx}"
+
+      # 5. Set up Rust
       - name: Set up Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -24,6 +40,7 @@ jobs:
           profile: minimal
           override: true
 
+      # 6. Cache Cargo dependencies
       - name: Cache cargo registry and build
         uses: actions/cache@v3
         with:
@@ -35,11 +52,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-
 
+      # 7. Rust formatting check (fail fast)
       - name: Check Rust formatting
-        run: cargo fmt -- --check
+        run: cargo fmt --all -- --check
 
+      # 8. Run Clippy linter
       - name: Run Clippy
         run: cargo clippy --all-targets --all-features -- -D warnings
 
+      # 9. Run tests
       - name: Run tests
         run: cargo test --all-features --verbose
