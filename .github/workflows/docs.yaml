@@ -5,6 +5,11 @@ on:
     branches:
       - '**' # run on any branch
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build-docs:
     name: Build Docs
