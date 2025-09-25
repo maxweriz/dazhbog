@@ -1,5 +1,5 @@
-use std::rc::{Rc, Weak};
 use std::cell::RefCell;
+use std::rc::{Rc, Weak};
 
 /// Type alias for a shared, mutable reference to a node
 type NodeRef<T> = Rc<RefCell<PartitionNode<T>>>;
