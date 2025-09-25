@@ -1,0 +1,11 @@
+#!/bin/bash
+# Run Bazel targets before committing
+echo "Running Bazel checks..."
+
+# Example: run tests or lint rules
+bazel run //:prettier_fix || exit 1  # exit 1 prevents the commit if Bazel fails
+bazel run //:rust_fmt_fix || exit 1  # exit 1 prevents the commit if Bazel fails
+bazel run //:clippy_check || exit 1  # exit 1 prevents the commit if Bazel fails
+bazel run //:rust_tests || exit 1  # exit 1 prevents the commit if Bazel fails
+
+echo "Bazel checks passed."
