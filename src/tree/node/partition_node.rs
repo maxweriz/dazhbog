@@ -4,6 +4,7 @@ use std::cell::RefCell;
 /// Type alias for a shared, mutable reference to a node
 type NodeRef<T> = Rc<RefCell<PartitionNode<T>>>;
 
+/// A node in a doubly linked list representing a partition of data
 #[derive(Debug)]
 pub struct PartitionNode<T> {
     pub value: T,
