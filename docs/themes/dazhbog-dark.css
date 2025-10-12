@@ -1,0 +1,70 @@
+/* dazhbog-dark.css: a full theme */
+:root {
+  /* readable dark palette */
+  --bg: #0f1115;
+  --fg: #e6eaf2;
+  --muted: #aab2c5;
+  --link: #7aa2f7;
+  --link-hover: #a6b8ff;
+  --accent: #89ddff;
+
+  /* code-ish */
+  --code-bg: #0a0c10;
+  --code-border: #1a1f2b;
+  --code-fg: #e6eaf2;
+
+  /* borders */
+  --line: #1b2130;
+}
+
+/* Page */
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+/* Links */
+a, .content a:link, .content a:visited {
+  color: var(--link);
+}
+a:hover { color: var(--link-hover); }
+
+/* Sidebar + items */
+.sidebar {
+  background: #0b0d12;
+  border-right: 1px solid var(--line);
+}
+.sidebar .logo-container img { filter: drop-shadow(0 0 0 transparent); }
+
+/* Search box */
+.search-input {
+  background: #0b0d12 !important;
+  color: var(--fg) !important;
+  border: 1px solid var(--line);
+}
+
+/* Headings & content width */
+.content { max-width: 1200px; }
+.content h1, .content h2, .content h3 { color: var(--fg); }
+
+/* Code blocks */
+pre, code {
+  background: var(--code-bg);
+  color: var(--code-fg);
+}
+pre {
+  border: 1px solid var(--code-border);
+  border-radius: 6px;
+  padding: 12px;
+  overflow: auto;
+}
+
+/* Items table + borders */
+.table-of-contents, .module-items, .stab {
+  border-color: var(--line);
+}
+
+/* Theme picker (top-right) contrast tweak */
+.theme-picker {
+  filter: saturate(0.9);
+}

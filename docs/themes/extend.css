@@ -1,0 +1,11 @@
+/* extend.css: subtle tweaks on top of the active theme */
+.content { line-height: 1.6; }
+.content p { margin: 0.6rem 0; }
+
+/* Improve code font and spacing */
+pre, code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", Consolas, "Liberation Mono", monospace; }
+pre { font-size: 0.95rem; }
+
+/* Make links underlined for accessibility */
+.content a { text-decoration: underline; text-underline-offset: 2px; }
+.content a:hover { text-decoration-thickness: 2px; }
