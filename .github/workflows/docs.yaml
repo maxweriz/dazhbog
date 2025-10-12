@@ -33,8 +33,8 @@ jobs:
       - name: Include Markdown docs directory in artifact
         run: |
           if [ -d docs ]; then
-          mkdir -p target/doc/docs
-          cp -R docs/. target/doc/docs/
+          mkdir -p target/doc/dazhbog/docs
+          cp -R docs/. target/doc/dazhbog/docs/
           else
           echo "No local docs/ directory found; skipping copy."
           fi
@@ -42,7 +42,7 @@ jobs:
       - name: Upload docs artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: target/doc
+          path: target/doc/dazhbog
 
   deploy-docs:
     name: Deploy Docs
