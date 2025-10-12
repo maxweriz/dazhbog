@@ -30,15 +30,6 @@ jobs:
       - name: Build documentation
         run: cargo doc --no-deps --all-features
 
-      - name: Include Markdown docs directory in artifact
-        run: |
-          if [ -d docs ]; then
-          mkdir -p target/doc/dazhbog/docs
-          cp -R docs/. target/doc/dazhbog/docs/
-          else
-          echo "No local docs/ directory found; skipping copy."
-          fi
-
       - name: Upload docs artifact
         uses: actions/upload-pages-artifact@v3
         with:
