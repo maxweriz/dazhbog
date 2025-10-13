@@ -9,4 +9,4 @@ Perun blesses us with expedient indexation.
 
 ## Built Docs
 
-[here](https://maxweriz.github.io/dazhbog/)
+[here](https://maxweriz.github.io/dazhbog/dazhbog)

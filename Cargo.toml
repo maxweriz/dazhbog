@@ -4,3 +4,13 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+
+
+[build]
+rustdocflags = [
+  "--static-root-path", "target/doc",
+  "--theme", "docs/themes/dazhbog-dark.css",
+  "--extend-css", "docs/themes/extend.css",
+  "--html-in-header", "docs/themes/header.html",
+  "--resource-suffix", "v1"
+]
