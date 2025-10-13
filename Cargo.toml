@@ -8,6 +8,7 @@ edition = "2024"
 
 [build]
 rustdocflags = [
+  "--static-root-path", "target/doc",
   "--theme", "docs/themes/dazhbog-dark.css",
   "--extend-css", "docs/themes/extend.css",
   "--html-in-header", "docs/themes/header.html",
